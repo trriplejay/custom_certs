@@ -14,6 +14,7 @@ pipelines:
           dockerImageTag: ${run_id}
           inputResources:
             - name: source_yaml
+              trigger: false
             - name: dummy
           integrations:
             - name: s_artifactory
