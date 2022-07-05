@@ -1,0 +1,18 @@
+resources:
+  - name: source_yaml
+    type: GitRepo
+    configuration:
+      gitProvider: gitlab
+      path: automation/custom_certs
+
+
+pipelines:
+  - name: controller
+    configuration:
+      nodePool
+    steps:
+      - name: first
+        type: TriggerPipeline
+        configuration:
+          pipelineName: pipeline_S_DockerPush_5933_004
+          stepName: S_DockerPush_5933_004_1

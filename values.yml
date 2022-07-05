@@ -1,0 +1,32 @@
+GitHub:
+  Org_test_Automation:
+    path: automation/custom_certs
+  Org_test_Automation_bash:
+    path: automation/custom_certs
+  Org_test_Automation_PowerShell:
+    path: automation/custom_certs
+  Org_test_Automation_Webhooks:
+      path: automation/custom_certs
+
+GitLab:
+  test_automation:
+    path: jfbeta/test_automation
+
+BitbucketCloud:
+  jfrogtesting:
+    path: jfbeta/jfrogtesting
+  test_automation:
+    path: jfbeta/test_automation
+
+BitbucketServer:
+  automation:
+    path: PIP/automation
+  test_automation:
+    path: PIP/test_automation
+
+Kubernetes:
+  namespace: pipe-master-pool
+
+Projects:
+  FirstProjectKey: proj1
+  SecondProjectKey: proj2
