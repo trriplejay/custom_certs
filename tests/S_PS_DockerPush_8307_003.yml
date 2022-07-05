@@ -1,3 +1,5 @@
+# note: custom certs as of pipelines 1.26.x do not seem to work on windows nodes
+# despite windows logs reporting that the certificates were successfully installed.
 
 # pipelines:
 #   - name: pipeline_S_PS_DockerPush_8307_003
