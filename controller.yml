@@ -5,16 +5,24 @@ resources:
       gitProvider: gitlab
       path: automation/custom_certs
 
+  - name: dummy
+    type: PropertyBag
+    configuration:
+      hello: world
 
 pipelines:
   - name: controller
     configuration:
       nodePool: trigger_pool
     steps:
-      - name: first
-        type: TriggerPipeline
+      - name: trigger_all
+        type: Bash
         configuration:
           integrations:
             - name: platform_token
-          pipelineName: pipeline_S_DockerPush_5933_004
-          stepName: S_DockerPush_5933_004_1
+          outputResources:
+            - name: dummy
+        execution:
+          onExecute:
+            - write_output dummy "parent_id=${run_id}"
+            - write_output dummy "parent_url=${step_url}"
