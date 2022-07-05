@@ -4,7 +4,6 @@ resources:
     configuration:
       gitProvider: gitlab
       path: automation/custom_certs
-      cloneProtocol: https
 
   - name: dummy
     type: PropertyBag
