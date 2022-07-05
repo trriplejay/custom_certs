@@ -1,6 +1,3 @@
-template: true
-valuesFilePath: ../values/gitRepoValues.yml
-
 
 pipelines:
   - name: pipeline_S_DockerPush_5933_004
