@@ -21,7 +21,7 @@ pipelines:
         execution:
           onStart:
             - artifactory_registry_url=$(echo "$int_s_artifactory_url" | sed 's#.*//\([^/]*\)/.*#\1#')
-            - cd $res_S_DockerPush_5933_004_GitRepo_resourcePath
+            - cd $res_source_yaml_resourcePath
             - echo "FROM $artifactory_registry_url/test-automation-docker-remote/hello-world" > Dockerfile
       - name: S_DockerPush_5933_004_2
         type: DockerPush
