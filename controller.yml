@@ -9,7 +9,7 @@ resources:
 pipelines:
   - name: controller
     configuration:
-      nodePool
+      nodePool: trigger_pool
     steps:
       - name: first
         type: TriggerPipeline
