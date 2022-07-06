@@ -25,17 +25,21 @@ pipelines:
             - name: dummy
           outputResources:
             - name: connector
+          integrations:
+            - name: gitlab_basics
         execution:
           onExecute:
             - pushd ${res_R_GitRepo_0016_dummy_repo_resourcePath}
             - echo "test ${run_id}" > dummy.txt
             - printenv | grep res_R_GitRepo_0016
-            # - git remote add basic https://${res_R_GitRepo_0016_dummy_repo_gitlab_username}
+            - export pushurl="https://root:${int_gitlab_basics_token}@${int_gitlab_basics_url}/${res_R_GitRepo_0016_dummy_repo_path}.git"
+            - echo "$pushurl"
+            - git remote add basic ${pushurl}
             - git config user.name 'JFrog Pipelines'
             - git config user.email 'build@pipelines.jfrog.com'
             - git add -A
             - git commit -m "test ${run_id}"
-            - git push origin main
+            - git push basic main
 
   - name: R_GitRepo_0016_dummy_repo_0016_triggered
     steps:
