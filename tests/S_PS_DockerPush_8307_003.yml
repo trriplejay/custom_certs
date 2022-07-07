@@ -18,12 +18,12 @@
 #               trigger: false
 #             - name: dummy
 #           integrations:
-#             - name: s_artifactory
+#             - name: art
 #         execution:
 #           onStart:
 #             - add_run_variables JFROG_CLI_BUILD_NUMBER=${run_id}
 #             - |
-#               $artifactory_url = [System.Uri]$int_s_artifactory_url
+#               $artifactory_url = [System.Uri]$int_art_url
 #               $artifactory_registry_host = $artifactory_url.Host
 #               $artifactory_registry_port = $artifactory_url.Port
 #               if ($artifactory_registry_port -eq 80) {
@@ -41,7 +41,7 @@
 #           inputSteps:
 #             - name: S_PS_DockerPush_8307_003_1
 #           integrations:
-#             - name: s_artifactory
+#             - name: art
 #       - name: S_PS_DockerPush_8307_003_3
 #         type: PowerShell
 #         configuration:
@@ -49,7 +49,7 @@
 #           inputSteps:
 #             - name: S_PS_DockerPush_8307_003_2
 #           integrations:
-#             - name: s_artifactory
+#             - name: art
 #         execution:
 #           onExecute:
 #             - "docker rmi ${artifactory_registry_url}/test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"

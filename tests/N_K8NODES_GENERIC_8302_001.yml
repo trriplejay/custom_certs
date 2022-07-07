@@ -1,5 +1,5 @@
 pipelines:
-  - name: pipelines_N_K8NODES_GENERIC_8302_001
+  - name: manual_pipelines_N_K8NODES_GENERIC_8302_001
     configuration:
       jfrogCliVersion: 2
     steps:

@@ -12,7 +12,7 @@ resources:
 
 
 pipelines:
-  - name: R_GitRepo_0016_dummy_repo_0016
+  - name: manual_R_GitRepo_0016_dummy_repo_0016
     steps:
       - name: R_GitRepo_0016_dummy_repo_0016_step_1
         type: Bash

@@ -1,5 +1,5 @@
 pipelines:
-  - name: pipelines_S_Bash_0239
+  - name: manual_pipelines_S_Bash_0239
     steps:
       - name: S_Bash_0239
         type: Bash
@@ -7,19 +7,19 @@ pipelines:
           inputResources:
             - name: dummy
           integrations:
-            - name: s_artifactory
+            - name: art
         execution:
           onExecute:
             - echo "executing step..."
             - |
-              [ ! -z "$int_s_artifactory_url"  ]
+              [ ! -z "$int_art_url"  ]
             - |
-              [ ! -z "$int_s_artifactory_masterName" ]
+              [ ! -z "$int_art_masterName" ]
             - |
-              [ ! -z "$int_s_artifactory_apikey" ]
+              [ ! -z "$int_art_apikey" ]
             - |
-              [ ! -z "$int_s_artifactory_id" ]
+              [ ! -z "$int_art_id" ]
             - |
-              [ ! -z "$int_s_artifactory_name" ]
+              [ ! -z "$int_art_name" ]
             - |
-              [ ! -z  "$int_s_artifactory_user" ]
+              [ ! -z  "$int_art_user" ]
