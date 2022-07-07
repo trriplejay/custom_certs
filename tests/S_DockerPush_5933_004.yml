@@ -150,7 +150,7 @@ pipelines:
             - if [ -z "$image" ]; then return 1; fi
             - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
 
-- name: pipeline_S_DockerPush_5933_004_u18
+  - name: pipeline_S_DockerPush_5933_004_u18
     configuration:
       nodePool: gcp_u18_vm_pool
       environmentVariables:
