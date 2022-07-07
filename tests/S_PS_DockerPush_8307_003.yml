@@ -11,7 +11,7 @@
 #         type: DockerBuild
 #         configuration:
 #           affinityGroup: S_PS_DockerPush_8307_003
-#           dockerImageName: ${artifactory_registry_url}/test-automation-docker-local/s_ps_dockerpush_8307
+#           dockerImageName: ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307
 #           dockerImageTag: ${run_id}
 #           inputResources:
 #             - name: source_yaml
@@ -37,7 +37,7 @@
 #         type: DockerPush
 #         configuration:
 #           affinityGroup: S_PS_DockerPush_8307_003
-#           targetRepository: test-automation-docker-local
+#           targetRepository: manual-test-automation-docker-local
 #           inputSteps:
 #             - name: S_PS_DockerPush_8307_003_1
 #           integrations:
@@ -52,6 +52,6 @@
 #             - name: art
 #         execution:
 #           onExecute:
-#             - "docker rmi ${artifactory_registry_url}/test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"
-#             - "jfrog rt docker-pull ${artifactory_registry_url}/test-automation-docker-local/s_ps_dockerpush_8307:${run_id} test-automation-docker-local"
-#             - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"
+#             - "docker rmi ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"
+#             - "jfrog rt docker-pull ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id} manual-test-automation-docker-local"
+#             - docker rmi "${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"
