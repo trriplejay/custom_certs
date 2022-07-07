@@ -1,0 +1,260 @@
+
+pipelines:
+  - name: host_pipeline_S_Dockerpush_5933_004_u20
+    configuration:
+      nodePool: gcp_u20_vm_pool
+      runtime:
+        type: host
+      environmentVariables:
+        readOnly:
+          JFROG_CLI_BUILD_NUMBER: ${run_id}
+    steps:
+      - name: S_DockerPush_5933_004_1_u20
+        type: DockerBuild
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          dockerImageName: ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933
+          dockerImageTag: ${run_id}
+          inputResources:
+            - name: source_yaml
+              trigger: false
+            - name: dummy
+          integrations:
+            - name: art
+            - name: s_rt_dockerReg
+        execution:
+          onStart:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - cd $res_source_yaml_resourcePath
+            - echo "FROM $artifactory_registry_url/test-automation-docker-remote/hello-world" > Dockerfile
+      - name: S_DockerPush_5933_004_2_u20
+        type: DockerPush
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          targetRepository: test-automation-docker-local
+          inputSteps:
+            - name: S_DockerPush_5933_004_1_u20
+          integrations:
+            - name: art
+      - name: S_DockerPush_5933_004_3_u20
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_DockerPush_5933_004_2_u20
+          integrations:
+            - name: art
+        execution:
+          onExecute:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+            - "jfrog rt docker-pull ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id} test-automation-docker-local"
+            - image="$(docker images | grep ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933 | grep ${run_id})"
+            - if [ -z "$image" ]; then return 1; fi
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+
+  - name: host_pipeline_S_Dockerpush_5933_004_c7
+    configuration:
+      nodePool: gcp_c7_vm_pool
+      runtime:
+        type: host
+      environmentVariables:
+        readOnly:
+          JFROG_CLI_BUILD_NUMBER: ${run_id}
+    steps:
+      - name: S_DockerPush_5933_004_1_c7
+        type: DockerBuild
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          dockerImageName: ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933
+          dockerImageTag: ${run_id}
+          inputResources:
+            - name: source_yaml
+              trigger: false
+            - name: dummy
+          integrations:
+            - name: art
+            - name: s_rt_dockerReg
+        execution:
+          onStart:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - cd $res_source_yaml_resourcePath
+            - echo "FROM $artifactory_registry_url/test-automation-docker-remote/hello-world" > Dockerfile
+      - name: S_DockerPush_5933_004_2_c7
+        type: DockerPush
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          targetRepository: test-automation-docker-local
+          inputSteps:
+            - name: S_DockerPush_5933_004_1_c7
+          integrations:
+            - name: art
+      - name: S_DockerPush_5933_004_3_c7
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_DockerPush_5933_004_2_c7
+          integrations:
+            - name: art
+        execution:
+          onExecute:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+            - "jfrog rt docker-pull ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id} test-automation-docker-local"
+            - image="$(docker images | grep ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933 | grep ${run_id})"
+            - if [ -z "$image" ]; then return 1; fi
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+
+  - name: host_pipeline_S_Dockerpush_5933_004_k8s
+    configuration:
+      nodePool: kubernetes
+      environmentVariables:
+        readOnly:
+          JFROG_CLI_BUILD_NUMBER: ${run_id}
+    steps:
+      - name: S_DockerPush_5933_004_1_k8s
+        type: DockerBuild
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          dockerImageName: ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933
+          dockerImageTag: ${run_id}
+          inputResources:
+            - name: source_yaml
+              trigger: false
+            - name: dummy
+          integrations:
+            - name: art
+            - name: s_rt_dockerReg
+        execution:
+          onStart:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - cd $res_source_yaml_resourcePath
+            - echo "FROM $artifactory_registry_url/test-automation-docker-remote/hello-world" > Dockerfile
+      - name: S_DockerPush_5933_004_2_k8s
+        type: DockerPush
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          targetRepository: test-automation-docker-local
+          inputSteps:
+            - name: S_DockerPush_5933_004_1_k8s
+          integrations:
+            - name: art
+      - name: S_DockerPush_5933_004_3_k8s
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_DockerPush_5933_004_2_k8s
+          integrations:
+            - name: art
+        execution:
+          onExecute:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+            - "jfrog rt docker-pull ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id} test-automation-docker-local"
+            - image="$(docker images | grep ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933 | grep ${run_id})"
+            - if [ -z "$image" ]; then return 1; fi
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+
+  - name: host_pipeline_S_Dockerpush_5933_004_u18
+    configuration:
+      nodePool: gcp_u18_vm_pool
+      runtime:
+        type: host
+      environmentVariables:
+        readOnly:
+          JFROG_CLI_BUILD_NUMBER: ${run_id}
+    steps:
+      - name: S_DockerPush_5933_004_1_u18
+        type: DockerBuild
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          dockerImageName: ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933
+          dockerImageTag: ${run_id}
+          inputResources:
+            - name: source_yaml
+              trigger: false
+            - name: dummy
+          integrations:
+            - name: art
+            - name: s_rt_dockerReg
+        execution:
+          onStart:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - cd $res_source_yaml_resourcePath
+            - echo "FROM $artifactory_registry_url/test-automation-docker-remote/hello-world" > Dockerfile
+      - name: S_DockerPush_5933_004_2_u18
+        type: DockerPush
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          targetRepository: test-automation-docker-local
+          inputSteps:
+            - name: S_DockerPush_5933_004_1_u18
+          integrations:
+            - name: art
+      - name: S_DockerPush_5933_004_3_u18
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_DockerPush_5933_004_2_u18
+          integrations:
+            - name: art
+        execution:
+          onExecute:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+            - "jfrog rt docker-pull ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id} test-automation-docker-local"
+            - image="$(docker images | grep ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933 | grep ${run_id})"
+            - if [ -z "$image" ]; then return 1; fi
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+
+
+  - name: host_pipeline_S_Dockerpush_5933_004_static
+    configuration:
+      nodePool: static_pool
+      runtime:
+        type: host
+      environmentVariables:
+        readOnly:
+          JFROG_CLI_BUILD_NUMBER: ${run_id}
+    steps:
+      - name: S_DockerPush_5933_004_1_static
+        type: DockerBuild
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          dockerImageName: ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933
+          dockerImageTag: ${run_id}
+          inputResources:
+            - name: source_yaml
+              trigger: false
+            - name: dummy
+          integrations:
+            - name: art
+            - name: s_rt_dockerReg
+        execution:
+          onStart:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - cd $res_source_yaml_resourcePath
+            - echo "FROM $artifactory_registry_url/test-automation-docker-remote/hello-world" > Dockerfile
+      - name: S_DockerPush_5933_004_2_static
+        type: DockerPush
+        configuration:
+          affinityGroup: S_DockerPush_5933_004
+          targetRepository: test-automation-docker-local
+          inputSteps:
+            - name: S_DockerPush_5933_004_1_static
+          integrations:
+            - name: art
+      - name: S_DockerPush_5933_004_3_static
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_DockerPush_5933_004_2_static
+          integrations:
+            - name: art
+        execution:
+          onExecute:
+            - artifactory_registry_url=$(echo "$int_art_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
+            - "jfrog rt docker-pull ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id} test-automation-docker-local"
+            - image="$(docker images | grep ${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933 | grep ${run_id})"
+            - if [ -z "$image" ]; then return 1; fi
+            - docker rmi "${artifactory_registry_url}/test-automation-docker-local/s_dockerpush_5933:${run_id}" || true
