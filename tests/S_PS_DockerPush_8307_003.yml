@@ -1,57 +1,56 @@
 # note: custom certs as of pipelines 1.26.x do not seem to work on windows nodes
 # despite windows logs reporting that the certificates were successfully installed.
 
-# pipelines:
-#   - name: pipeline_S_PS_DockerPush_8307_003
-#     configuration:
-#       jfrogCliVersion: 2
-#       nodePool: win_2019
-#     steps:
-#       - name: S_PS_DockerPush_8307_003_1
-#         type: DockerBuild
-#         configuration:
-#           affinityGroup: S_PS_DockerPush_8307_003
-#           dockerImageName: ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307
-#           dockerImageTag: ${run_id}
-#           inputResources:
-#             - name: source_yaml
-#               trigger: false
-#             - name: dummy
-#           integrations:
-#             - name: art
-#         execution:
-#           onStart:
-#             - add_run_variables JFROG_CLI_BUILD_NUMBER=${run_id}
-#             - |
-#               $artifactory_url = [System.Uri]$int_art_url
-#               $artifactory_registry_host = $artifactory_url.Host
-#               $artifactory_registry_port = $artifactory_url.Port
-#               if ($artifactory_registry_port -eq 80) {
-#                 add_run_variables artifactory_registry_url="${artifactory_registry_host}"
-#               } else {
-#                 add_run_variables artifactory_registry_url="${artifactory_registry_host}:${artifactory_registry_port}"
-#               }
-#             - Push-Location $res_S_PS_DockerPush_8307_003_GitRepo_resourcePath
-#             - Set-Content -Path './Dockerfile' -Value 'FROM mcr.microsoft.com/windows/nanoserver:1809'
-#       - name: S_PS_DockerPush_8307_003_2
-#         type: DockerPush
-#         configuration:
-#           affinityGroup: S_PS_DockerPush_8307_003
-#           targetRepository: manual-test-automation-docker-local
-#           inputSteps:
-#             - name: S_PS_DockerPush_8307_003_1
-#           integrations:
-#             - name: art
-#       - name: S_PS_DockerPush_8307_003_3
-#         type: PowerShell
-#         configuration:
-#           affinityGroup: S_PS_DockerPush_8307_003
-#           inputSteps:
-#             - name: S_PS_DockerPush_8307_003_2
-#           integrations:
-#             - name: art
-#         execution:
-#           onExecute:
-#             - "docker rmi ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"
-#             - "jfrog rt docker-pull ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id} manual-test-automation-docker-local"
-#             - docker rmi "${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"
+pipelines:
+  - name: manual_pipeline_S_PS_DockerPush_8307_003
+    configuration:
+      jfrogCliVersion: 2
+      nodePool: win_2019
+    steps:
+      - name: S_PS_DockerPush_8307_003_1
+        type: DockerBuild
+        configuration:
+          affinityGroup: S_PS_DockerPush_8307_003
+          dockerImageName: ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307
+          dockerImageTag: ${run_id}
+          inputResources:
+            - name: source_yaml
+              trigger: false
+          integrations:
+            - name: art
+        execution:
+          onStart:
+            - add_run_variables JFROG_CLI_BUILD_NUMBER=${run_id}
+            - |
+              $artifactory_url = [System.Uri]$int_art_url
+              $artifactory_registry_host = $artifactory_url.Host
+              $artifactory_registry_port = $artifactory_url.Port
+              if ($artifactory_registry_port -eq 80) {
+                add_run_variables artifactory_registry_url="${artifactory_registry_host}"
+              } else {
+                add_run_variables artifactory_registry_url="${artifactory_registry_host}:${artifactory_registry_port}"
+              }
+            - Push-Location $res_S_PS_DockerPush_8307_003_GitRepo_resourcePath
+            - Set-Content -Path './Dockerfile' -Value 'FROM mcr.microsoft.com/windows/nanoserver:1809'
+      - name: S_PS_DockerPush_8307_003_2
+        type: DockerPush
+        configuration:
+          affinityGroup: S_PS_DockerPush_8307_003
+          targetRepository: manual-test-automation-docker-local
+          inputSteps:
+            - name: S_PS_DockerPush_8307_003_1
+          integrations:
+            - name: art
+      - name: S_PS_DockerPush_8307_003_3
+        type: PowerShell
+        configuration:
+          affinityGroup: S_PS_DockerPush_8307_003
+          inputSteps:
+            - name: S_PS_DockerPush_8307_003_2
+          integrations:
+            - name: art
+        execution:
+          onExecute:
+            - "docker rmi ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"
+            - "jfrog rt docker-pull ${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id} manual-test-automation-docker-local"
+            - docker rmi "${artifactory_registry_url}/manual-test-automation-docker-local/s_ps_dockerpush_8307:${run_id}"
