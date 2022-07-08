@@ -5,7 +5,7 @@ pipelines:
   - name: manual_pipeline_S_PS_DockerPush_8307_003
     configuration:
       jfrogCliVersion: 2
-      nodePool: win_2019
+      nodePool: static_pool_win
     steps:
       - name: S_PS_DockerPush_8307_003_1
         type: DockerBuild
