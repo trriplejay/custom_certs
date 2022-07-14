@@ -29,8 +29,8 @@ pipelines:
       - name: S_DockerPush_5933_004_2_u20
         type: DockerPush
         configuration:
-          jfrogCliVersion: 2
           affinityGroup: S_DockerPush_5933_004
+          targetRepository: manual-test-automation-docker-local
           inputSteps:
             - name: S_DockerPush_5933_004_1_u20
           integrations:
