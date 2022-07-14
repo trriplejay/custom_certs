@@ -2,6 +2,7 @@
 pipelines:
   - name: pipeline_S_DockerPush_5933_004_u20
     configuration:
+      jfrogCliVersion: 2
       nodePool: gcp_u20_vm_pool
       environmentVariables:
         readOnly:
@@ -29,7 +30,6 @@ pipelines:
         type: DockerPush
         configuration:
           affinityGroup: S_DockerPush_5933_004
-          targetRepository: manual-test-automation-docker-local
           inputSteps:
             - name: S_DockerPush_5933_004_1_u20
           integrations:
