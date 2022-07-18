@@ -11,8 +11,12 @@ pipelines:
             - name: dummy
         execution:
           onExecute:
-            - printenv | grep proxy
-            - printenv | grep PROXY
+            - echo "$http_proxy"
+            - echo "$https_proxy"
+            - echo "$no_proxy"
+            - echo "$HTTP_PROXY"
+            - echo "$HTTPS_PROXY"
+            - echo "$NO_PROXY"
 
   - name: host_proxy_c7
     steps:
@@ -26,8 +30,12 @@ pipelines:
             - name: dummy
         execution:
           onExecute:
-            - printenv | grep proxy
-            - printenv | grep PROXY
+            - echo "$http_proxy"
+            - echo "$https_proxy"
+            - echo "$no_proxy"
+            - echo "$HTTP_PROXY"
+            - echo "$HTTPS_PROXY"
+            - echo "$NO_PROXY"
 
   - name: container_proxy_u20
     steps:
@@ -39,8 +47,12 @@ pipelines:
             - name: dummy
         execution:
           onExecute:
-            - printenv | grep proxy
-            - printenv | grep PROXY
+            - echo "$http_proxy"
+            - echo "$https_proxy"
+            - echo "$no_proxy"
+            - echo "$HTTP_PROXY"
+            - echo "$HTTPS_PROXY"
+            - echo "$NO_PROXY"
 
   - name: container_proxy_c7
     steps:
@@ -52,5 +64,9 @@ pipelines:
             - name: dummy
         execution:
           onExecute:
-            - printenv | grep proxy
-            - printenv | grep PROXY
+            - echo "$http_proxy"
+            - echo "$https_proxy"
+            - echo "$no_proxy"
+            - echo "$HTTP_PROXY"
+            - echo "$HTTPS_PROXY"
+            - echo "$NO_PROXY"
