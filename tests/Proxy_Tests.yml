@@ -1,0 +1,20 @@
+pipelines:
+  - name: host_proxy_u20
+    type: Bash
+    configuration:
+      inputResources:
+        - name: dummy
+    execution:
+      onExecute:
+        - printenv | grep proxy
+        - printenv | grep PROXY
+
+  - name: host_proxy_uc7
+    type: Bash
+    configuration:
+      inputResources:
+        - name: dummy
+    execution:
+      onExecute:
+        - printenv | grep proxy
+        - printenv | grep PROXY
