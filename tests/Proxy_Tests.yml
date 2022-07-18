@@ -4,6 +4,7 @@ pipelines:
       - name: u20_test
         type: Bash
         configuration:
+          nodePool: u20_static
           runtime:
             type: host
           inputResources:
@@ -18,6 +19,7 @@ pipelines:
       - name: c7_test
         type: Bash
         configuration:
+          nodePool: c7_static
           runtime:
             type: host
           inputResources:
@@ -32,6 +34,7 @@ pipelines:
       - name: u20_test
         type: Bash
         configuration:
+          nodePool: u20_static
           inputResources:
             - name: dummy
         execution:
@@ -44,6 +47,7 @@ pipelines:
       - name: c7_test
         type: Bash
         configuration:
+          nodePool: c7_static
           inputResources:
             - name: dummy
         execution:
