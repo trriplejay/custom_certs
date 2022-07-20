@@ -1,7 +1,13 @@
+resources:
+  - name: dummy
+    type: PropertyBag
+    configuration:
+      hello: world
+
 pipelines:
-  - name: host_proxy_u20
+  - name: proxy_test
     steps:
-      - name: u20_test
+      - name: host_u20_test
         type: Bash
         configuration:
           nodePool: u20_static
@@ -18,9 +24,7 @@ pipelines:
             - echo "$HTTPS_PROXY"
             - echo "$NO_PROXY"
 
-  - name: host_proxy_c7
-    steps:
-      - name: c7_test
+      - name: host_c7_test
         type: Bash
         configuration:
           nodePool: c7_static
@@ -37,9 +41,7 @@ pipelines:
             - echo "$HTTPS_PROXY"
             - echo "$NO_PROXY"
 
-  - name: container_proxy_u20
-    steps:
-      - name: u20_test
+      - name: container_u20_test
         type: Bash
         configuration:
           nodePool: u20_static
@@ -54,9 +56,7 @@ pipelines:
             - echo "$HTTPS_PROXY"
             - echo "$NO_PROXY"
 
-  - name: container_proxy_c7
-    steps:
-      - name: c7_test
+      - name: container_c7_test
         type: Bash
         configuration:
           nodePool: c7_static
