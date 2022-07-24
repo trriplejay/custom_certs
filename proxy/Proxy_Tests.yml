@@ -17,12 +17,42 @@ pipelines:
             - name: dummy
         execution:
           onExecute:
-            - echo "$http_proxy"
-            - echo "$https_proxy"
-            - echo "$no_proxy"
-            - echo "$HTTP_PROXY"
-            - echo "$HTTPS_PROXY"
-            - echo "$NO_PROXY"
+            - |
+                if [ -n "$http_proxy" ]; then
+                  echo "$http_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$https_proxy" ]; then
+                  echo "$https_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$no_proxy" ]; then
+                  echo "$http_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$HTTP_PROXY" ]; then
+                  echo "$HTTP_PROXY"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$HTTPS_PROXY" ]; then
+                  echo "$HTTPS_PROXY"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$NO_PROXY" ]; then
+                  echo "$NO_PROXY"
+                else
+                  exit 1
+                fi
 
       - name: host_c7_test
         type: Bash
@@ -34,12 +64,42 @@ pipelines:
             - name: dummy
         execution:
           onExecute:
-            - echo "$http_proxy"
-            - echo "$https_proxy"
-            - echo "$no_proxy"
-            - echo "$HTTP_PROXY"
-            - echo "$HTTPS_PROXY"
-            - echo "$NO_PROXY"
+            - |
+                if [ -n "$http_proxy" ]; then
+                  echo "$http_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$https_proxy" ]; then
+                  echo "$https_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$no_proxy" ]; then
+                  echo "$http_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$HTTP_PROXY" ]; then
+                  echo "$HTTP_PROXY"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$HTTPS_PROXY" ]; then
+                  echo "$HTTPS_PROXY"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$NO_PROXY" ]; then
+                  echo "$NO_PROXY"
+                else
+                  exit 1
+                fi
 
       - name: container_u20_test
         type: Bash
@@ -49,12 +109,42 @@ pipelines:
             - name: dummy
         execution:
           onExecute:
-            - echo "$http_proxy"
-            - echo "$https_proxy"
-            - echo "$no_proxy"
-            - echo "$HTTP_PROXY"
-            - echo "$HTTPS_PROXY"
-            - echo "$NO_PROXY"
+            - |
+                if [ -n "$http_proxy" ]; then
+                  echo "$http_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$https_proxy" ]; then
+                  echo "$https_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$no_proxy" ]; then
+                  echo "$http_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$HTTP_PROXY" ]; then
+                  echo "$HTTP_PROXY"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$HTTPS_PROXY" ]; then
+                  echo "$HTTPS_PROXY"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$NO_PROXY" ]; then
+                  echo "$NO_PROXY"
+                else
+                  exit 1
+                fi
 
       - name: container_c7_test
         type: Bash
@@ -64,9 +154,39 @@ pipelines:
             - name: dummy
         execution:
           onExecute:
-            - echo "$http_proxy"
-            - echo "$https_proxy"
-            - echo "$no_proxy"
-            - echo "$HTTP_PROXY"
-            - echo "$HTTPS_PROXY"
-            - echo "$NO_PROXY"
+            - |
+                if [ -n "$http_proxy" ]; then
+                  echo "$http_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$https_proxy" ]; then
+                  echo "$https_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$no_proxy" ]; then
+                  echo "$http_proxy"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$HTTP_PROXY" ]; then
+                  echo "$HTTP_PROXY"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$HTTPS_PROXY" ]; then
+                  echo "$HTTPS_PROXY"
+                else
+                  exit 1
+                fi
+            - |
+                if [ -n "$NO_PROXY" ]; then
+                  echo "$NO_PROXY"
+                else
+                  exit 1
+                fi
